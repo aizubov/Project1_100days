@@ -16,21 +16,19 @@ class ViewController: UITableViewController {
         title = "Storm Viewer"
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
-
         let fm = FileManager.default
-        
         let path = Bundle.main.resourcePath!
         let items = try! fm.contentsOfDirectory(atPath: path)
+        print(items)
         
         for item in items {
             if item.hasPrefix("nssl") {
                 pictures.append(item)
             }
         }
-
         pictures.sort()
-
+        
+        print(pictures)
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pictures.count
@@ -52,16 +50,4 @@ class ViewController: UITableViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
-    @objc func shareTapped() {
-        let items: [Any] = ["This app is cool, buy ASAP!"]
-        
-        let vc = UIActivityViewController(activityItems: items, applicationActivities: [])
-        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-        present(vc, animated: true)
-    }
-    
-    
-    
-    
 }
