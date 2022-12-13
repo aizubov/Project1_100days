@@ -54,7 +54,11 @@ class ViewController: UITableViewController {
     }
     
     @objc func shareTapped() {
-        let items: [Any] = ["This app is cool, buy ASAP!"]
+        var items: [Any] = ["This app is cool, check it out!"]
+        
+        if let url = URL(string: "https://github.com/aizubov/Project1_100days") {
+            items.append(url)
+        }
         
         let vc = UIActivityViewController(activityItems: items, applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
